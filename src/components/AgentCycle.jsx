@@ -36,9 +36,6 @@ export default function AgentCycle() {
             <div className="out-tag mono"><Layers size={15} /> {step.out}</div>
           </motion.div>
         </AnimatePresence>
-        <div className="cycle-meter" aria-hidden="true">
-          <motion.i key={`${i}-${paused}`} initial={{ width: paused ? '100%' : 0 }} animate={{ width: '100%' }} transition={{ duration: paused ? 0 : 5.2, ease: 'linear' }} />
-        </div>
       </SpotCard>
     </div>
   )

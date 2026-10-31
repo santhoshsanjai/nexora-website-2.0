@@ -93,13 +93,10 @@ button { font: inherit; cursor: pointer; }
 }
 .eyebrow::before { content: ''; width: 28px; height: 1px; background: var(--grad); }
 .section-head { max-width: 760px; margin-bottom: clamp(40px, 6vw, 64px); }
-.section-head h2 { font-size: clamp(2rem, 4.4vw, 3.2rem); margin: 16px 0; }
-.section-head p { color: var(--text-2); font-size: 1.1rem; }
+.section-head h2 { font-size: clamp(1.85rem, 3.8vw, 2.8rem); margin: 16px 0; }
+.section-head p { color: var(--text-2); font-size: 1.05rem; }
 .section-head.center { margin-inline: auto; text-align: center; }
 .section-head.center .eyebrow { justify-content: center; }
-
-/* Scroll progress */
-.progress { position: fixed; inset: 0 0 auto 0; height: 3px; background: var(--grad); transform-origin: 0; z-index: 200; }
 
 /* ---------- Buttons ---------- */
 .btn {
@@ -133,11 +130,20 @@ button { font: inherit; cursor: pointer; }
 .card:hover { transform: translateY(-6px); border-color: var(--border-strong); box-shadow: var(--glow); }
 .card:hover::before { opacity: 1; }
 .icon-chip {
-  width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 22px;
-  background: var(--grad); color: #fff; box-shadow: 0 12px 28px -12px rgba(124, 58, 237, 0.8);
+  position: relative; width: 52px; height: 52px; border-radius: 16px; display: grid; place-items: center; margin-bottom: 22px;
+  color: var(--p-500); background: linear-gradient(145deg, rgba(139, 92, 246, 0.13), rgba(139, 92, 246, 0.03));
+  border: 1px solid var(--border-strong); transition: color 0.3s ease, border-color 0.3s ease, background 0.3s ease, transform 0.3s ease;
 }
-.card h3 { font-size: 1.25rem; margin-bottom: 10px; }
-.card p { color: var(--text-2); font-size: 0.97rem; }
+[data-theme='dark'] .icon-chip { color: var(--p-300); }
+.icon-chip svg { stroke-width: 1.5; position: relative; z-index: 1; }
+.icon-chip::before { content: ''; position: absolute; inset: 5px; border-radius: 11px; border: 1px dashed var(--border); }
+.icon-chip::after {
+  content: ''; position: absolute; top: -3px; right: -3px; width: 7px; height: 7px; border-radius: 50%;
+  background: var(--p-400); box-shadow: 0 0 0 3px var(--bg), 0 0 10px var(--p-400);
+}
+.card:hover .icon-chip, .info-item:hover .icon-chip { border-color: var(--p-500); background: linear-gradient(145deg, rgba(139, 92, 246, 0.22), rgba(139, 92, 246, 0.06)); transform: translateY(-2px); }
+.card h3 { font-size: 1.18rem; font-weight: 600; margin-bottom: 8px; letter-spacing: -0.015em; }
+.card p { color: var(--text-2); font-size: 0.94rem; line-height: 1.7; }
 .card .agent-note {
   margin-top: 18px; padding-top: 16px; border-top: 1px dashed var(--border-strong);
   font-size: 0.86rem; color: var(--p-400); display: flex; gap: 8px; align-items: flex-start;
@@ -201,7 +207,7 @@ button { font: inherit; cursor: pointer; }
 }
 .pill .dot { width: 8px; height: 8px; border-radius: 50%; background: #34d399; box-shadow: 0 0 0 0 rgba(52, 211, 153, 0.6); animation: ping 2s infinite; }
 @keyframes ping { 70% { box-shadow: 0 0 0 10px rgba(52, 211, 153, 0); } 100% { box-shadow: 0 0 0 0 rgba(52, 211, 153, 0); } }
-.hero h1 { font-size: clamp(2.5rem, 6.2vw, 4.9rem); margin: 26px 0 24px; font-weight: 800; }
+.hero h1 { font-size: clamp(2.3rem, 5.4vw, 4.4rem); margin: 26px 0 24px; font-weight: 800; }
 .hero h1 .line { display: block; overflow: hidden; padding-bottom: 0.08em; }
 .hero-sub { color: var(--text-2); font-size: clamp(1.02rem, 1.5vw, 1.2rem); max-width: 560px; }
 .hero-cta { display: flex; flex-wrap: wrap; gap: 14px; margin-top: 36px; }
@@ -265,17 +271,15 @@ button { font: inherit; cursor: pointer; }
   border: 1px solid var(--border); text-align: left; transition: all 0.3s ease; width: 100%;
 }
 .step-btn .n { font-family: 'JetBrains Mono', monospace; font-size: 0.8rem; color: var(--text-3); }
-.step-btn b { font-family: 'Sora', sans-serif; font-size: 1.05rem; flex: 1; }
+.step-btn b { font-family: 'Sora', sans-serif; font-size: 0.98rem; font-weight: 600; flex: 1; }
 .step-btn:hover { border-color: var(--border-strong); color: var(--text); }
 .step-btn.on { background: var(--surface-2); border-color: var(--p-500); color: var(--text); box-shadow: var(--glow); }
 .step-btn.on .n { color: var(--p-400); }
 .cycle-panel { padding: 40px; min-height: 360px; display: flex; flex-direction: column; justify-content: center; }
-.cycle-panel .icon-chip { width: 64px; height: 64px; border-radius: 20px; }
-.cycle-panel h3 { font-size: 2rem; margin-bottom: 14px; }
-.cycle-panel p { font-size: 1.08rem; color: var(--text-2); }
+.cycle-panel .icon-chip { width: 60px; height: 60px; border-radius: 18px; margin-bottom: 24px; }
+.cycle-panel h3 { font-size: 1.7rem; margin-bottom: 12px; }
+.cycle-panel p { font-size: 1.02rem; color: var(--text-2); max-width: 520px; }
 .out-tag { margin-top: 26px; display: inline-flex; gap: 10px; align-items: center; padding: 10px 16px; border-radius: 12px; background: var(--bg-2); border: 1px solid var(--border); color: var(--p-400); font-size: 0.85rem; width: fit-content; }
-.cycle-meter { margin-top: 28px; height: 3px; border-radius: 3px; background: var(--border); overflow: hidden; }
-.cycle-meter i { display: block; height: 100%; background: var(--grad); }
 
 /* ---------- Showcase / work ---------- */
 .showcase { display: grid; grid-template-columns: 1fr 1.1fr; gap: 56px; align-items: center; }
@@ -324,8 +328,8 @@ button { font: inherit; cursor: pointer; }
 
 /* ---------- Page hero ---------- */
 .page-hero { padding: 170px 0 70px; position: relative; overflow: hidden; }
-.page-hero h1 { font-size: clamp(2.4rem, 5.6vw, 4.2rem); margin: 18px 0 20px; max-width: 900px; }
-.page-hero p { color: var(--text-2); font-size: 1.15rem; max-width: 680px; }
+.page-hero h1 { font-size: clamp(2.2rem, 5vw, 3.7rem); margin: 18px 0 20px; max-width: 900px; }
+.page-hero p { color: var(--text-2); font-size: 1.08rem; max-width: 680px; }
 
 /* ---------- CTA band ---------- */
 .cta {

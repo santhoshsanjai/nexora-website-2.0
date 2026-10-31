@@ -1,6 +1,6 @@
 import { useEffect, useState } from 'react'
 import { Routes, Route, useLocation } from 'react-router-dom'
-import { AnimatePresence, motion, useScroll, useSpring } from 'framer-motion'
+import { AnimatePresence } from 'framer-motion'
 import Navbar from './components/Navbar.jsx'
 import Footer from './components/Footer.jsx'
 import Preloader from './components/Preloader.jsx'
@@ -15,19 +15,13 @@ import Contact from './pages/Contact.jsx'
 import NotFound from './pages/NotFound.jsx'
 
 function useTheme() {
-  const [theme, setTheme] = useState(() => document.documentElement.getAttribute('data-theme') || 'dark')
+  const [theme, setTheme] = useState(() => document.documentElement.getAttribute('data-theme') || 'light')
   useEffect(() => {
     document.documentElement.setAttribute('data-theme', theme)
     try { localStorage.setItem('nexora-theme', theme) } catch { /* storage unavailable */ }
     document.querySelector('meta[name="theme-color"]')?.setAttribute('content', theme === 'dark' ? '#0a0613' : '#fbf9ff')
   }, [theme])
   return [theme, () => setTheme((t) => (t === 'dark' ? 'light' : 'dark'))]
-}
-
-function ScrollProgress() {
-  const { scrollYProgress } = useScroll()
-  const scaleX = useSpring(scrollYProgress, { stiffness: 120, damping: 24, restDelta: 0.001 })
-  return <motion.div className="progress" style={{ scaleX }} />
 }
 
 export default function App() {
@@ -47,7 +41,6 @@ export default function App() {
   return (
     <>
       <AnimatePresence>{loading && <Preloader onDone={finishIntro} />}</AnimatePresence>
-      <ScrollProgress />
       <Navbar theme={theme} onToggleTheme={toggleTheme} />
       <main>
         <Routes>
