@@ -393,12 +393,29 @@ button { font: inherit; cursor: pointer; }
 .footer-bottom { display: flex; justify-content: space-between; flex-wrap: wrap; gap: 12px; margin-top: 56px; padding-top: 26px; border-top: 1px solid var(--border); color: var(--text-3); font-size: 0.85rem; }
 
 /* ---------- Preloader ---------- */
-.preloader { position: fixed; inset: 0; z-index: 500; background: var(--bg); display: grid; place-items: center; }
-.preloader-inner { display: flex; flex-direction: column; align-items: center; gap: 22px; }
-.preloader img { width: 112px; filter: var(--logo-filter); }
-.preloader .word { font-family: 'Sora', sans-serif; font-weight: 700; letter-spacing: 0.4em; font-size: 0.85rem; color: var(--p-400); }
-.preloader .track { width: 160px; height: 2px; background: var(--border); border-radius: 2px; overflow: hidden; }
-.preloader .track i { display: block; height: 100%; background: var(--grad); }
+.preloader { position: fixed; inset: 0; z-index: 500; background: var(--bg); display: grid; place-items: center; overflow: hidden; }
+.pl-glow { position: absolute; width: min(640px, 90vw); aspect-ratio: 1; border-radius: 50%; background: radial-gradient(circle, var(--aurora-1), transparent 65%); filter: blur(30px); animation: plPulse 3s ease-in-out infinite; }
+@keyframes plPulse { 50% { transform: scale(1.12); opacity: 0.75; } }
+.preloader-inner { position: relative; display: flex; flex-direction: column; align-items: center; }
+.pl-stage { position: relative; width: 220px; height: 220px; display: grid; place-items: center; }
+.pl-svg { position: absolute; inset: 0; width: 100%; height: 100%; overflow: visible; }
+.pl-hex { fill: none; stroke: var(--p-500); stroke-width: 1.4; stroke-linejoin: round; }
+.pl-hex.thin { stroke: var(--p-300); stroke-width: 0.8; opacity: 0.7; }
+.pl-dash { fill: none; stroke: var(--p-400); stroke-width: 0.7; stroke-dasharray: 2 7; opacity: 0.8; }
+.pl-spin { transform-origin: 100px 100px; animation: plSpin 14s linear infinite; }
+@keyframes plSpin { to { transform: rotate(360deg); } }
+.pl-node { fill: var(--p-400); filter: drop-shadow(0 0 5px var(--p-400)); }
+.pl-logo { position: relative; width: 118px; height: 118px; }
+.pl-logo img { width: 100%; height: 100%; object-fit: contain; filter: var(--logo-filter); }
+.pl-shine {
+  position: absolute; inset: 0; pointer-events: none;
+  background: linear-gradient(105deg, transparent 38%, rgba(255, 255, 255, 0.95) 50%, transparent 62%);
+  background-size: 250% 100%; background-repeat: no-repeat;
+  -webkit-mask: url('/brand/mark.png') center / contain no-repeat; mask: url('/brand/mark.png') center / contain no-repeat;
+}
+.pl-word { margin-top: 18px; display: flex; font-family: 'Sora', sans-serif; font-weight: 700; font-size: 2rem; letter-spacing: 0.14em; color: var(--text); }
+.pl-sub { margin-top: 8px; font-size: 0.7rem; font-weight: 500; color: var(--p-400); padding-left: 0.46em; }
+.pl-tag { margin-top: 22px; font-size: 0.78rem; color: var(--text-3); letter-spacing: 0.08em; }
 
 .not-found { min-height: 80vh; display: grid; place-items: center; text-align: center; padding-top: 80px; }
 .not-found h1 { font-size: clamp(5rem, 16vw, 10rem); }
@@ -430,6 +447,9 @@ button { font: inherit; cursor: pointer; }
   .fc1 { right: 0; } .fc2 { display: none; }
   .scroll-cue { display: none; }
   .brand-text span { display: none; }
+  .pl-stage { width: 190px; height: 190px; }
+  .pl-logo { width: 100px; height: 100px; }
+  .pl-word { font-size: 1.6rem; }
 }
 
 @media (prefers-reduced-motion: reduce) {
